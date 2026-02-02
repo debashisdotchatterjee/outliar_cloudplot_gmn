@@ -2,7 +2,7 @@
 
 # GMN Cloud-Plot Pipeline (S² Radiant Outlier Detection) — Reproducible Bundle
 
-This repository / folder contains a **Colab-ready** pipeline to:
+This repository / folder contains a **Colab-ready** python code pipeline to:
 1. **Download** Global Meteor Network (GMN) *trajectory-summary* data,
 2. Filter to a chosen **IAU shower code** (default: `PER` for Perseids),
 3. Convert geocentric radiant **(RA, Dec)** to unit vectors on the **unit sphere** \(\mathbb S^2\),
@@ -12,7 +12,7 @@ This repository / folder contains a **Colab-ready** pipeline to:
 
 ---
 
-## Data sources (with proper citation expectations)
+## Data sources (with  citation )
 
 ### Global Meteor Network (GMN) public data products
 - GMN trajectory-summary archive index (daily/monthly/yearly/all-time):  
@@ -25,7 +25,7 @@ This repository / folder contains a **Colab-ready** pipeline to:
   https://globalmeteornetwork.org/data/
 
 **Licensing:** GMN public data products are distributed under **CC BY 4.0** (see GMN portal / documentation).  
-**When you publish:** cite the **GMN portal** and the **GMN methodology papers**.
+
 
 ---
 
