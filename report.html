@@ -1,0 +1,470 @@
+<html><head><meta charset='utf-8'><title>Cloud-plot GMN Report</title>
+<style>body{font-family:Arial, sans-serif; margin:22px;} img{max-width:1100px; width:100%; border:1px solid #ddd; margin:10px 0;} table{border-collapse:collapse; margin:10px 0;} td,th{border:1px solid #ccc; padding:6px 8px; font-size: 13px;} code{background:#f5f5f5; padding:2px 4px;}</style>
+</head><body>
+<h1>Intrinsic Cloud-plot outlier analysis on GMN Perseids radiants</h1>
+<p><b>Dataset:</b> GMN trajectory-summary monthly file <code>traj_summary_monthly_201908.txt</code> (sha256: <code>e46fa56cc91416be3ce21722e8df2d6fdf49fe61d0f99442c3f28d0159588806</code>)</p>
+<p><b>Shower:</b> PER (Perseids) &nbsp;&nbsp; <b>Calibration level:</b> α=0.99 (main results)</p>
+<h2>Summary table</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>sample</th>
+      <th>n</th>
+      <th>median_dist_deg</th>
+      <th>q75_dist_deg</th>
+      <th>IF_deg</th>
+      <th>kappa_rob</th>
+      <th>k(alpha=0.99)</th>
+      <th>outliers</th>
+      <th>outlier_rate</th>
+      <th>median_RA_deg</th>
+      <th>median_Dec_deg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PER (all Aug 2019)</td>
+      <td>1197</td>
+      <td>2.039147</td>
+      <td>3.473524</td>
+      <td>5.847189</td>
+      <td>1094.585280</td>
+      <td>1.164048</td>
+      <td>124</td>
+      <td>0.103592</td>
+      <td>47.592867</td>
+      <td>58.010285</td>
+    </tr>
+    <tr>
+      <td>PER (near-peak window)</td>
+      <td>588</td>
+      <td>1.301329</td>
+      <td>1.892997</td>
+      <td>3.407271</td>
+      <td>2687.480065</td>
+      <td>1.163637</td>
+      <td>1</td>
+      <td>0.001701</td>
+      <td>48.236711</td>
+      <td>58.105069</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Alpha sensitivity</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>alpha</th>
+      <th>k</th>
+      <th>IF_deg</th>
+      <th>outliers</th>
+      <th>outlier_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0.9000</td>
+      <td>0.408551</td>
+      <td>4.306620</td>
+      <td>222</td>
+      <td>0.185464</td>
+    </tr>
+    <tr>
+      <td>0.9250</td>
+      <td>0.519114</td>
+      <td>4.532075</td>
+      <td>203</td>
+      <td>0.169591</td>
+    </tr>
+    <tr>
+      <td>0.9500</td>
+      <td>0.665001</td>
+      <td>4.829559</td>
+      <td>183</td>
+      <td>0.152882</td>
+    </tr>
+    <tr>
+      <td>0.9750</td>
+      <td>0.893169</td>
+      <td>5.294827</td>
+      <td>154</td>
+      <td>0.128655</td>
+    </tr>
+    <tr>
+      <td>0.9900</td>
+      <td>1.164048</td>
+      <td>5.847189</td>
+      <td>124</td>
+      <td>0.103592</td>
+    </tr>
+    <tr>
+      <td>0.9950</td>
+      <td>1.351435</td>
+      <td>6.229298</td>
+      <td>103</td>
+      <td>0.086048</td>
+    </tr>
+    <tr>
+      <td>0.9975</td>
+      <td>1.526943</td>
+      <td>6.587185</td>
+      <td>88</td>
+      <td>0.073517</td>
+    </tr>
+    <tr>
+      <td>0.9990</td>
+      <td>1.744071</td>
+      <td>7.029940</td>
+      <td>66</td>
+      <td>0.055138</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Top 20 flagged outliers (Aug 2019 PER)</h2>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Unique_trajectory</th>
+      <th>Beginning_2</th>
+      <th>IAU</th>
+      <th>IAU_2</th>
+      <th>Sol_lon</th>
+      <th>RAgeo</th>
+      <th>DECgeo</th>
+      <th>dist_deg</th>
+      <th>Vgeo</th>
+      <th>Qc</th>
+      <th>MedianFitErr</th>
+      <th>Num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>20190823094203_M815N</td>
+      <td>2019-08-23 09:42:03.066017</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>149.722344</td>
+      <td>66.81060</td>
+      <td>59.50238</td>
+      <td>10.042497</td>
+      <td>62.46755</td>
+      <td>14.07</td>
+      <td>70.25</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190801093411_xAk02</td>
+      <td>2019-08-01 09:34:11.942722</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>128.606088</td>
+      <td>30.61919</td>
+      <td>54.88673</td>
+      <td>9.856199</td>
+      <td>56.88210</td>
+      <td>46.17</td>
+      <td>53.95</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>20190801081121_EudnB</td>
+      <td>2019-08-01 08:11:21.356044</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>128.551040</td>
+      <td>30.53349</td>
+      <td>55.12623</td>
+      <td>9.800655</td>
+      <td>57.48118</td>
+      <td>7.85</td>
+      <td>34.32</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>20190823063404_Bstoy</td>
+      <td>2019-08-23 06:34:04.434857</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>149.596573</td>
+      <td>66.23669</td>
+      <td>58.60368</td>
+      <td>9.781149</td>
+      <td>60.72779</td>
+      <td>6.04</td>
+      <td>33.27</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190801200825_42xkr</td>
+      <td>2019-08-01 20:08:25.192687</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.027547</td>
+      <td>30.43470</td>
+      <td>56.04477</td>
+      <td>9.514990</td>
+      <td>59.41324</td>
+      <td>46.07</td>
+      <td>32.49</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190802093044_b8ZGt</td>
+      <td>2019-08-02 09:30:44.331095</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.560773</td>
+      <td>31.51841</td>
+      <td>54.74772</td>
+      <td>9.451681</td>
+      <td>58.99014</td>
+      <td>75.64</td>
+      <td>66.73</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190801102531_0A2xD</td>
+      <td>2019-08-01 10:25:31.967618</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>128.640199</td>
+      <td>31.60793</td>
+      <td>54.87579</td>
+      <td>9.348524</td>
+      <td>59.23228</td>
+      <td>84.12</td>
+      <td>77.89</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190802075934_DtA3l</td>
+      <td>2019-08-02 07:59:34.777901</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.500185</td>
+      <td>31.91441</td>
+      <td>54.65825</td>
+      <td>9.288774</td>
+      <td>58.03593</td>
+      <td>11.41</td>
+      <td>63.42</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190801094755_LNo7M</td>
+      <td>2019-08-01 09:47:55.510937</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>128.615209</td>
+      <td>30.94736</td>
+      <td>55.94155</td>
+      <td>9.278758</td>
+      <td>59.56436</td>
+      <td>42.55</td>
+      <td>28.78</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190801210838_wmRYr</td>
+      <td>2019-08-01 21:08:38.821849</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.067572</td>
+      <td>30.68622</td>
+      <td>56.61401</td>
+      <td>9.211696</td>
+      <td>58.01592</td>
+      <td>28.27</td>
+      <td>9.20</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190824092923_jZa8v</td>
+      <td>2019-08-24 09:29:23.110694</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>150.677604</td>
+      <td>64.78135</td>
+      <td>60.81751</td>
+      <td>9.154383</td>
+      <td>59.79411</td>
+      <td>34.46</td>
+      <td>94.79</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190802103929_QWmdY</td>
+      <td>2019-08-02 10:39:29.122401</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.606466</td>
+      <td>32.86054</td>
+      <td>54.06525</td>
+      <td>9.101574</td>
+      <td>56.03828</td>
+      <td>68.30</td>
+      <td>67.39</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190801091033_2D6cx</td>
+      <td>2019-08-01 09:10:33.065808</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>128.590375</td>
+      <td>33.30136</td>
+      <td>53.88062</td>
+      <td>8.981336</td>
+      <td>58.70563</td>
+      <td>58.06</td>
+      <td>99.29</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190802045656_SR8Uv</td>
+      <td>2019-08-02 04:56:56.767855</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.378801</td>
+      <td>32.66804</td>
+      <td>54.61113</td>
+      <td>8.925591</td>
+      <td>60.07237</td>
+      <td>5.56</td>
+      <td>49.84</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190802101404_9qWKe</td>
+      <td>2019-08-02 10:14:04.966194</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.589582</td>
+      <td>32.32869</td>
+      <td>55.17790</td>
+      <td>8.845576</td>
+      <td>58.18471</td>
+      <td>25.37</td>
+      <td>58.81</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190802023931_G0JiN</td>
+      <td>2019-08-02 02:39:31.382202</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.287468</td>
+      <td>32.39591</td>
+      <td>55.20118</td>
+      <td>8.800971</td>
+      <td>57.53434</td>
+      <td>15.61</td>
+      <td>24.81</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190804001848_Zo2In</td>
+      <td>2019-08-04 00:18:48.542098</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>131.108391</td>
+      <td>33.82771</td>
+      <td>53.90572</td>
+      <td>8.708484</td>
+      <td>58.90235</td>
+      <td>25.56</td>
+      <td>57.16</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>20190820224617_u5rMz</td>
+      <td>2019-08-20 22:46:17.475245</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>147.357988</td>
+      <td>63.90287</td>
+      <td>60.59023</td>
+      <td>8.691145</td>
+      <td>59.71652</td>
+      <td>41.74</td>
+      <td>112.08</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190801213416_Yjd3Q</td>
+      <td>2019-08-01 21:34:16.729460</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>129.084607</td>
+      <td>33.80267</td>
+      <td>54.08912</td>
+      <td>8.620604</td>
+      <td>59.85240</td>
+      <td>70.38</td>
+      <td>61.97</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>20190822044737_h4htG</td>
+      <td>2019-08-22 04:47:37.559985</td>
+      <td>7</td>
+      <td>PER</td>
+      <td>148.562189</td>
+      <td>64.00495</td>
+      <td>59.16846</td>
+      <td>8.609064</td>
+      <td>60.21477</td>
+      <td>8.50</td>
+      <td>38.08</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Figures</h2>
+<h3>fig01_ra_dec_scatter.png</h3>
+<img src='figures/fig01_ra_dec_scatter.png'/>
+<h3>fig02_mollweide_distance.png</h3>
+<img src='figures/fig02_mollweide_distance.png'/>
+<h3>fig03_distance_hist.png</h3>
+<img src='figures/fig03_distance_hist.png'/>
+<h3>fig04_ecdf_vs_vmf.png</h3>
+<img src='figures/fig04_ecdf_vs_vmf.png'/>
+<h3>fig05_sol_lon_vs_distance.png</h3>
+<img src='figures/fig05_sol_lon_vs_distance.png'/>
+<h3>fig06_qc_boxplot.png</h3>
+<img src='figures/fig06_qc_boxplot.png'/>
+<h3>fig07_fiterr_boxplot.png</h3>
+<img src='figures/fig07_fiterr_boxplot.png'/>
+<h3>fig08_station_multiplicity.png</h3>
+<img src='figures/fig08_station_multiplicity.png'/>
+<h3>fig09_outlier_rate_vs_alpha.png</h3>
+<img src='figures/fig09_outlier_rate_vs_alpha.png'/>
+<h3>fig10_qc_vs_fiterr.png</h3>
+<img src='figures/fig10_qc_vs_fiterr.png'/>
+<h3>fig11_hexbin_density.png</h3>
+<img src='figures/fig11_hexbin_density.png'/>
+<h3>fig12_distance_order_stats.png</h3>
+<img src='figures/fig12_distance_order_stats.png'/>
+<h2>Files produced</h2><ul>
+<li><code>tables/table_alpha_sensitivity.csv</code></li>
+<li><code>tables/table_group_stats.csv</code></li>
+<li><code>tables/table_k_constants.csv</code></li>
+<li><code>tables/table_summary.csv</code></li>
+<li><code>tables/table_top20_outliers.csv</code></li>
+<li><code>figures/fig01_ra_dec_scatter.png</code></li>
+<li><code>figures/fig02_mollweide_distance.png</code></li>
+<li><code>figures/fig03_distance_hist.png</code></li>
+<li><code>figures/fig04_ecdf_vs_vmf.png</code></li>
+<li><code>figures/fig05_sol_lon_vs_distance.png</code></li>
+<li><code>figures/fig06_qc_boxplot.png</code></li>
+<li><code>figures/fig07_fiterr_boxplot.png</code></li>
+<li><code>figures/fig08_station_multiplicity.png</code></li>
+<li><code>figures/fig09_outlier_rate_vs_alpha.png</code></li>
+<li><code>figures/fig10_qc_vs_fiterr.png</code></li>
+<li><code>figures/fig11_hexbin_density.png</code></li>
+<li><code>figures/fig12_distance_order_stats.png</code></li>
+</ul>
+<h2>Citation / provenance note</h2>
+<p>GMN data products are released under CC BY 4.0; please cite the GMN data portal and GMN methodology papers when publishing results.</p>
+</body></html>
